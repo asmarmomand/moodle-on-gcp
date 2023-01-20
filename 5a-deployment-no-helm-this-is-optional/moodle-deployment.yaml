@@ -53,7 +53,7 @@ spec:
         - name: MOODLE_DATABASE_PORT_NUMBER
           value: "3306"
         - name: MOODLE_DATABASE_NAME
-          value: <YOUR-MOODLE-DB-NAME>
+          value: onlineschool01
         - name: MOODLE_DATABASE_USER
           value: root
         - name: MOODLE_DATABASE_PASSWORD
@@ -64,16 +64,16 @@ spec:
         - name: MOODLE_SKIP_BOOTSTRAP
           value: "no" # you should change this to "yes" after first instalation, will increase pod startup times
         - name: MOODLE_USERNAME
-          value: admin
+          value: amomand
         - name: MOODLE_PASSWORD
           valueFrom:
             secretKeyRef:
               key: moodle-password
               name: moodle-admin-password
         - name: MOODLE_SITE_NAME
-          value: <YOUR-MOODLE-SITE-NAME>
+          value: Shah Ghasi
         - name: MOODLE_EMAIL
-          value: user@example.com
+          value: asmar.momand@gmail.com
         - name: PHP_ENABLE_OPCACHE
           value: "true"
         - name: PHP_MEMORY_LIMIT

@@ -27,4 +27,4 @@ spec:
   volumeName: pv-filestore
   resources:
     requests:
-      storage: 2.5Ti
+      storage: 10GiB

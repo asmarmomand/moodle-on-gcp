@@ -67,14 +67,14 @@ gcloud container clusters create $GKE_NAME \
   --enable-master-global-access \
   --enable-autoscaling \
   --min-nodes=1 \
-  --max-nodes=3 \
+  --max-nodes=1 \
   --enable-autorepair \
   --monitoring=SYSTEM \
   --num-nodes=1 \
   --scopes=storage-rw,compute-ro \
   --enable-autorepair \
   --enable-intra-node-visibility \
-  --machine-type=n1-standard-2 \
+  --machine-type=n1-standard-1 \
   --network=$VPC_NAME \
   --subnetwork=$SUBNET_NAME \
   --addons=HttpLoadBalancing,HorizontalPodAutoscaling,GcpFilestoreCsiDriver \
@@ -138,7 +138,7 @@ gcloud compute addresses create moodle-managed-range \
   --purpose=VPC_PEERING \
   --addresses=$MOODLE_MYSQL_MANAGED_PEERING_RANGE \
   --prefix-length=24 \
-  --description="Moodle Managed Services" \
+  --description="online-school-01 Moodle Managed Services" \
   --network=$VPC_NAME
 
 # list addresses range created for vpc peering
@@ -156,8 +156,7 @@ gcloud services vpc-peerings list --network=$VPC_NAME
 # creates cloud sql instance (managed)
 gcloud sql instances create $MYSQL_INSTANCE_NAME \
   --database-version=MYSQL_8_0 \
-  --cpu 1 \
-  --memory 3840MB \
+  --tier=db-g1-micro \
   --zone $ZONE \
   --network=$VPC_NAME \
   --retained-backups-count=7 \
@@ -190,6 +189,7 @@ gcloud sql databases list --instance $MYSQL_INSTANCE_NAME
 # creates memorystore redis (managed)
 gcloud redis instances create $REDIS_NAME \
   --size=1 \
+  --tier=basic \
   --network=$VPC_NAME \
   --enable-auth \
   --maintenance-window-day=sunday \
@@ -207,7 +207,7 @@ gcloud compute addresses create moodle-managed-range-filestore \
   --purpose=VPC_PEERING \
   --addresses=$MOODLE_FILESTORE_MANAGED_PEERING_RANGE \
   --prefix-length=24 \
-  --description="Moodle Managed Services" \
+  --description="online-school-01 Moodle Managed Services" \
   --network=$VPC_NAME
 
 # updates the peering connection adding both sql and filestore ranges
@@ -218,10 +218,10 @@ gcloud services vpc-peerings update \
 
 # creates a filestore service for NFS support
 gcloud filestore instances create $FILESTORE_NAME \
-  --description="NFS to support Moodle data." \
+  --description="online-school-01 NFS to support Moodle data." \
   --tier=BASIC_SSD \
-  --file-share="name=moodleshare,capacity=2.5TB" \
-  --network="name=$VPC_NAME,reserved-ip-range=moodle-managed-range-filestore,connect-mode=PRIVATE_SERVICE_ACCESS" \
+  --file-share="name=online-school-01-share,capacity=10 GiB" \
+  --network="name=$VPC_NAME,reserved-ip-range=online-school-01-managed-range-filestore,connect-mode=PRIVATE_SERVICE_ACCESS" \
   --zone=$ZONE
 
 # lists filestores available
@@ -231,7 +231,7 @@ gcloud filestore instances list
 gcloud services enable artifactregistry.googleapis.com
 
 # create artifact registry repo for building Moodle images (you can skip it if you already have a repo for images)
-gcloud artifacts repositories create moodle-filestore \
+gcloud artifacts repositories create online-school-01-firestore-artifactory \
   --location=$REGION \
   --repository-format=docker
 

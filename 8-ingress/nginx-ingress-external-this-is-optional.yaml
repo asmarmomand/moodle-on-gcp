@@ -28,10 +28,10 @@ spec:
   ingressClassName: "nginx"
   tls:
   - hosts:
-    - moodle.<YOUR-LB-EXTERNAL-IP>.nip.io
+    - maktab.ghasi.ca
     secretName: tls-secret
   rules:
-  - host: moodle.<YOUR-LB-EXTERNAL-IP>.nip.io
+  - host: maktab.ghasi.ca
     http:
       paths:
         - path: /

@@ -54,18 +54,18 @@ moodleSiteName: "Moodle 4.0.1 on GKE" # some site name if you wish to do so.
 ## User of the application
 ## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
 ##
-moodleUsername: "<YOUR-MOODLE-ADMIN-USERNAME>"
+moodleUsername: "amomand"
 
 ## Application password
 ## Defaults to a random 10-character alphanumeric string if not set
 ## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
 ##
-moodlePassword: "<YOUR-MOODLE-ADMIN-PASSWORD>"
+moodlePassword: "!!INVG&s7738Dem@cr@tic#2!!@@"
 
 ## Admin email
 ## ref: https://github.com/bitnami/bitnami-docker-moodle#configuration
 ##
-moodleEmail: user@example.com
+moodleEmail: asmar.momand@gmail.com
 
 ## Set to `yes` to allow the container to be started with blank passwords
 ## ref: https://github.com/bitnami/bitnami-docker-moodle#environment-variables
@@ -213,7 +213,7 @@ persistence:
   ## If defined, PVC must be created manually before volume will be bound
   ##
   accessMode: ReadWriteMany
-  size: 2.5Ti
+  size: 10GiB
 
   ## A manually managed Persistent Volume Claim
   ## Requires persistence.enabled: true
@@ -303,10 +303,10 @@ externalDatabase:
   user: root
   ## @param externalDatabase.password Password for the above username
   ##
-  password: "<YOUR-DATABASE-PASSWORD>"
+  password: "!!INVG##@@Demo%%#@"
   ## @param externalDatabase.database Name of the existing database
   ##
-  database: <YOUR-MOODLE-DB-NAME>
+  database: onlineschool01
   ## @param externalDatabase.existingSecret Name of an existing secret resource containing the DB password
   ##
   existingSecret: ""

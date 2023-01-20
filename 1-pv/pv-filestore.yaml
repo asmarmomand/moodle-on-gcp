@@ -18,7 +18,7 @@ metadata:
   name: pv-filestore
 spec:
   capacity:
-    storage: 2.5Ti
+    storage: 10 GiB
   persistentVolumeReclaimPolicy: Retain
   accessModes:
   - ReadWriteMany
